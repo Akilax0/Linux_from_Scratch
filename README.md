@@ -23,5 +23,31 @@ Mainboard
     Kernel runs initialization program old -> init(systemV)
                                        now -> systemd
     /etc/fstab entry to mount root partiton
+
+    BIOS will be untouched , so are hardwired. 
+    Provide Harddrive data MBR,Boot,Root 
+    We will create this harddrive.
+    10GB at least.30GB to do stuff.
+
+
+
+## How?
+
+    MBR : boot (100MB) : root  (rest)
+    Divides the process into 3 whole stages
+
+
+| Build Machine(A)  | Host Machine(B)    |  Target(C) 
+| -------------     | ----------------   |-----------
+| gcc               | Linux source code  |   /bin
+| make              | grub               |   /sbin
+|                   | ecoutils gcc make  |   /lib64
+
          
-                        
+<br>
+Build machine is the machine we have our OS installed we use its toolchain along with source files of B to make the toolchain for B. Once that is done we 
+
+    chroot $LFS                       
+
+where LFS = /mnt/lfs making B its own isolated system.
+Finallly we build neccessary files on C. After this process comes the configurations.
